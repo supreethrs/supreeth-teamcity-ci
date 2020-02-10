@@ -16,7 +16,7 @@ namespace CoreAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("AllowSpecificOrigin")]
-    [Authorize]
+    //[Authorize]
     public class AuditController : BaseController
     {
         private readonly ILogger _logger;
@@ -32,8 +32,10 @@ namespace CoreAPI.Controllers
         {
             _logger.LogInformation("Start Service");
             var audits = await _auditService.GetAudits().ConfigureAwait(false);
+            var auditList = audits.ToList();
+            auditList.Add(new Audit { Id = 1, Name = "First", AuditDate = DateTime.UtcNow });
             audits.ToList().Add(new Audit { Id = 1, Name = "First", AuditDate = DateTime.UtcNow });
-            return CustomResponse(HttpStatusCode.OK, audits);
+            return CustomResponse(HttpStatusCode.OK, auditList);
         }
 
         [HttpGet("Get1")]
