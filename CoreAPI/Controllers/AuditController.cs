@@ -30,9 +30,10 @@ namespace CoreAPI.Controllers
         [HttpGet("")]
         public async Task<IActionResult> Get()
         {
-                _logger.LogInformation("Start Service");
-                var audits = await _auditService.GetAudits().ConfigureAwait(false);
-                return CustomResponse(HttpStatusCode.OK, audits);
+            _logger.LogInformation("Start Service");
+            var audits = await _auditService.GetAudits().ConfigureAwait(false);
+            audits.ToList().Add(new Audit { Id = 1, Name = "First", AuditDate = DateTime.UtcNow });
+            return CustomResponse(HttpStatusCode.OK, audits);
         }
 
         [HttpGet("Get1")]
