@@ -30,6 +30,7 @@ namespace CoreAPI.Controllers
         [HttpGet("")]
         public async Task<IActionResult> Get()
         {
+            _logger.LogWarning("Start service warning");
             _logger.LogInformation("Start Service");
             var audits = await _auditService.GetAudits().ConfigureAwait(false);
             var auditList = audits.ToList();
