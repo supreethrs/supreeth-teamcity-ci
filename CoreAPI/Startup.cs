@@ -81,8 +81,9 @@ namespace CoreAPI
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:4200",
-                                        "https://srsUI.azurewebsites.net");
+                    .WithOrigins(   "http://localhost:4200",
+                                    "https://srsUI.azurewebsites.net",
+                                    "https://srsui-staging.azurewebsites.net");
 
                 });
             });
